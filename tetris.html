@@ -19,8 +19,24 @@
     </body>
     
     <script src="gameClass.js"></script>
+    <script src="activeObj.js"></script>
     <script>
         hra = new Game(8, 20, document.getElementById("hra"));
+
+
+        async function gameLoop() {
+            while(true) {
+                await hra.step();
+
+                await sleep(1000);
+            }
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        setTimeout(gameLoop, 0);
     </script>
 </head>
 </html>
