@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="utf-8" />
+    <title>Titulek</title>
+ 
+    <style>
+        .cell {
+            width: 2vw;
+            height: 2vw;
+            border: solid black;
+            border-width: 2px 2px 1px 1px;
+        }
+    </style>
+
+    <body>
+        <div id="hra"></div>
+ 
+    </body>
+    
+    <script src="gameClass.js"></script>
+    <script>
+        hra = new Game(8, 20, document.getElementById("hra"));
+    </script>
+</head>
+</html>
+
