@@ -36,7 +36,7 @@ class Game {
         this.clearArray();
         for(let j = 0; j < this.activePieces.length; j++) {
             var piece = this.activePieces[j];
-            if (this.checkForGround(piece)) {
+            if (piece.checkForGround(0, 1, this.array, this.height, this.width)) {
                 piece.pos[1] += 1;
                 var x = piece.pos[0];
                 var y = piece.pos[1];
@@ -51,28 +51,11 @@ class Game {
                     var x = piece.pos[0] + piece.parts[i][0];
                     var y = piece.pos[1] + piece.parts[i][1];
                     this.array[y][x] = piece.color;
-                    console.log(this.array[y][x] = piece.color, x, y)
                 }
             }
         }
 
         this.draw();
-    }
-
-    checkForGround(piece) {
-        for(let i = 0; i < piece.parts.length; i++) {
-            var y = piece.pos[1] + piece.parts[i][1] + 1;
-            var x = piece.pos[0] + piece.parts[i][0];
-
-            if(y >= this.height)
-                return false;
-            else if(this.array[y][x] == undefined) console.error("Undefined position for piece");
-            
-            if(this.array[y][x] != " ")
-                return false;
-        }
-
-        return true;
     }
 
     draw() {

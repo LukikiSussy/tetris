@@ -28,9 +28,17 @@
             while(true) {
                 await hra.step();
 
-                await sleep(100);
+                await sleep(500);
             }
         }
+
+        document.addEventListener('keydown', e => {
+           if(e.key.toLowerCase() == "d") {
+                for (let i = 0; i < hra.activePieces.length; i++) {
+                    hra.activePieces[i].rotate();
+                }
+           }
+        });
 
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
