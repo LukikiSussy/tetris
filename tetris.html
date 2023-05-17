@@ -37,10 +37,13 @@
                     hra.rotatePiece();
            }
            if(e.key.toLowerCase() == "arrowleft") {
-                    hra.rotatePiece();
+                    hra.movePiece(-1);
            }
            if(e.key.toLowerCase() == "arrowright") {
-                    hra.rotatePiece();
+                    hra.movePiece(1);
+           }
+           if(e.key.toLowerCase() == "arrowdown") {
+                    hra.dropPiece();
            }
         });
 

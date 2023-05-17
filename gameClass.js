@@ -67,6 +67,13 @@ class Game {
         }
     }
 
+    movePiece(direction) {
+        for (let i = 0; i < this.activePieces.length; i++) {
+            if (this.activePieces[i].isValid(direction, 0, this.array, this.height, this.width))
+                this.activePieces[i].pos[0] += direction;
+        }
+    }
+
     draw() {
         for (let y = 0; y < this.height; y++) {
             for (let x = 0; x < this.width; x++) {
@@ -81,6 +88,14 @@ class Game {
                 if(this.activeArray[y][x] != " ") {
                     document.getElementById(cell).style.backgroundColor = this.activeArray[y][x];
                 }
+            }
+        }
+    }
+
+    dropPiece() {
+        for (let i = 0; i < this.activePieces.length; i++) {
+            while(this.activePieces[i].isValid(0, 1, this.array, this.height, this.width)) {
+                this.activePieces[i].pos[1] ++;
             }
         }
     }
