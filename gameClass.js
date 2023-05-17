@@ -1,4 +1,5 @@
 class Game {
+    score = 0;
     gameRunning = true;
     array = [];
     activeArray = [];
@@ -58,7 +59,32 @@ class Game {
             }
         }
 
+        this.clearLine();
+
         this.draw();
+    }
+
+    clearLine() {
+        for (let y = 0; y < this.height; y++) {
+            var lineScore = 0;
+            for (let x = 0; x < this.width; x++) {
+                if (this.array[y][x] != " ") {
+                    lineScore ++
+                }
+            }
+            if (lineScore >= this.width) {
+                score++;
+                for (let i = 0; i < this.width; i++) {
+                    this.array[y][i] = " ";
+                }
+
+                for(let h = y; h > 0; h--) {
+                    for (let w = 0; w < this.width; w++) {
+                        this.array[h][w] = this.array[h-1][w];
+                    }
+                }
+            }
+        }
     }
 
     rotatePiece() {

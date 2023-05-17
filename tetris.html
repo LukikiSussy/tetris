@@ -11,10 +11,27 @@
             border: solid black;
             border-width: 2px 2px 1px 1px;
         }
+
+        .text {
+            font-size: 50px;
+            font-weight: bold;
+            display: table-cell;
+            row-gap: 100px;
+        }
+
+        .Row {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
     </style>
 
     <body>
-        <div id="hra"></div>
+        <div class="row">
+            <div id="hra" class="text"></div>
+            <div class="text" id="score">0</div>
+        </div>
+        
  
     </body>
     
@@ -27,6 +44,7 @@
         async function gameLoop() {
             while(true) {
                 await hra.step();
+                document.getElementById("score").innerHTML = hra.score;
 
                 await sleep(500);
             }
