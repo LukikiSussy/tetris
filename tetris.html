@@ -21,7 +21,7 @@
     <script src="gameClass.js"></script>
     <script src="activeObj.js"></script>
     <script>
-        hra = new Game(8, 10, document.getElementById("hra"));
+        hra = new Game(10, 20, document.getElementById("hra"));
 
 
         async function gameLoop() {
@@ -34,9 +34,13 @@
 
         document.addEventListener('keydown', e => {
            if(e.key.toLowerCase() == "d") {
-                for (let i = 0; i < hra.activePieces.length; i++) {
-                    hra.activePieces[i].rotate();
-                }
+                    hra.rotatePiece();
+           }
+           if(e.key.toLowerCase() == "arrowleft") {
+                    hra.rotatePiece();
+           }
+           if(e.key.toLowerCase() == "arrowright") {
+                    hra.rotatePiece();
            }
         });
 
@@ -45,6 +49,7 @@
         }
 
         setTimeout(gameLoop, 0);
+        hra.newPiece()
     </script>
 </head>
 </html>

@@ -1,4 +1,5 @@
 class Game {
+    gameRunning = true;
     array = [];
     activeArray = [];
     activePieces = [];
@@ -33,10 +34,11 @@ class Game {
     }
 
     step() {
+        if (!this.gameRunning) return;
         this.clearArray();
         for(let j = 0; j < this.activePieces.length; j++) {
             var piece = this.activePieces[j];
-            if (piece.checkForGround(0, 1, this.array, this.height, this.width)) {
+            if (piece.isValid(0, 1, this.array, this.height, this.width)) {
                 piece.pos[1] += 1;
                 var x = piece.pos[0];
                 var y = piece.pos[1];
@@ -52,10 +54,17 @@ class Game {
                     var y = piece.pos[1] + piece.parts[i][1];
                     this.array[y][x] = piece.color;
                 }
+                this.newPiece();
             }
         }
 
         this.draw();
+    }
+
+    rotatePiece() {
+        for (let i = 0; i < this.activePieces.length; i++) {
+            this.activePieces[i].chceckIfRotationIsValid(0, 0, this.array, this.height, this.width);
+        }
     }
 
     draw() {
@@ -76,7 +85,11 @@ class Game {
         }
     }
 
-    newPiece(type, x) {
-        this.activePieces.push(new ActiveObject(type, x))
+    newPiece() {
+        var piece = new ActiveObject(Math.floor(Math.random() * 7), Math.floor(this.width/2));
+        if (!piece.isValid(0, 1, this.array, this.height, this.width)) {
+            this.gameRunning = false;
+        }
+        this.activePieces.push(piece);
     }
 }
