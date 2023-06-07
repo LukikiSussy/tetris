@@ -4,6 +4,7 @@ class Game {
     array = [];
     activeArray = [];
     activePieces = [];
+    lastPieceId;
     constructor(width, height, parent) {
         this.width = width;
         this.height = height;
@@ -73,7 +74,7 @@ class Game {
                 }
             }
             if (lineScore >= this.width) {
-                score++;
+                this.score++;
                 for (let i = 0; i < this.width; i++) {
                     this.array[y][i] = " ";
                 }
@@ -127,10 +128,17 @@ class Game {
     }
 
     newPiece() {
-        var piece = new ActiveObject(Math.floor(Math.random() * 7), Math.floor(this.width/2));
-        if (!piece.isValid(0, 1, this.array, this.height, this.width)) {
-            this.gameRunning = false;
+        var pieceId = Math.floor(Math.random() * 7);
+        var piece = new ActiveObject(pieceId, Math.floor(this.width/2));
+        if (pieceId != this.lastPieceId) {
+            this.lastPieceId = pieceId;
+            if (!piece.isValid(0, 1, this.array, this.height, this.width)) {
+                this.gameRunning = false;
+            }
+            this.activePieces.push(piece);
         }
-        this.activePieces.push(piece);
+        else {
+            this.newPiece();
+        }
     }
 }
